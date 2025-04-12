@@ -48,7 +48,7 @@ const Cart = () => {
           </h2>
           <button 
             onClick={toggleCart}
-            className="p-1.5 rounded-full hover:bg-muted transition-colors"
+            className="btn-action rounded-full"
             aria-label="Close cart"
           >
             <X className="w-5 h-5" />
@@ -89,11 +89,11 @@ const Cart = () => {
                     </div>
                     
                     <div className="flex items-center justify-between mt-3">
-                      <div className="flex items-center border rounded-md">
+                      <div className="flex items-center border rounded-md overflow-hidden">
                         <button
                           onClick={() => updateQuantity(item.id, item.quantity - 1)}
                           disabled={item.quantity <= 1}
-                          className="p-1 px-2 hover:bg-muted transition-colors"
+                          className="btn-action py-1 px-2 rounded-none"
                           aria-label="Decrease quantity"
                         >
                           <Minus className="w-4 h-4" />
@@ -101,7 +101,7 @@ const Cart = () => {
                         <span className="px-3 py-1">{item.quantity}</span>
                         <button
                           onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                          className="p-1 px-2 hover:bg-muted transition-colors"
+                          className="btn-action py-1 px-2 rounded-none"
                           aria-label="Increase quantity"
                         >
                           <Plus className="w-4 h-4" />
@@ -110,7 +110,7 @@ const Cart = () => {
                       
                       <button
                         onClick={() => removeFromCart(item.id)}
-                        className="p-1.5 rounded-full hover:bg-rose-50 hover:text-rose-500 transition-colors"
+                        className="btn-action rounded-full text-rose-500"
                         aria-label="Remove item"
                       >
                         <Trash2 className="w-4 h-4" />
@@ -130,11 +130,11 @@ const Cart = () => {
               <div className="grid grid-cols-2 gap-3">
                 <button
                   onClick={clearCart}
-                  className="btn-secondary py-2"
+                  className="btn-destructive py-2"
                 >
                   Clear Cart
                 </button>
-                <button className="btn-primary py-2">
+                <button className="btn-checkout py-2">
                   Checkout
                 </button>
               </div>

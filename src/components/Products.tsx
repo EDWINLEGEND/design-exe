@@ -7,7 +7,7 @@ const products = [
     id: 1,
     name: "Bamboo Toothbrush",
     description: "Sustainable bamboo handle with BPA-free nylon bristles. 100% biodegradable handle helps eliminate plastic waste from your daily routine.",
-    image: "https://images.unsplash.com/photo-1607613009820-a29f7bb81c04?auto=format&fit=crop&q=80&w=800",
+    image: "https://images.unsplash.com/photo-1553691475-f38e4026275b?w=700&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8YmFtYm9vJTIwdG9vdGglMjBicnVzaHxlbnwwfDF8MHx8fDA%3D",
     price: "$4.99",
     badges: ["100% Biodegradable Handle", "Plastic-Free Packaging"]
   },
@@ -15,7 +15,7 @@ const products = [
     id: 2,
     name: "Organic Cotton T-Shirt",
     description: "GOTS-certified organic cotton t-shirt made without harmful chemicals. Ethically manufactured under fair-trade conditions to ensure living wages.",
-    image: "https://images.unsplash.com/photo-1576566588028-4147f3842f27?auto=format&fit=crop&q=80&w=800",
+    image: "https://images.unsplash.com/photo-1739001411231-4fc0f4140259?w=700&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fG9yZ2FuaWMlMjB0JTIwc2hpcnR8ZW58MHwxfDB8fHww",
     price: "$24.99",
     badges: ["Ethically Made", "Zero Chemical Processing"]
   },
@@ -31,7 +31,7 @@ const products = [
     id: 4,
     name: "Reusable Coffee Cup",
     description: "Insulated bamboo fiber coffee cup that keeps your drinks hot. Eliminates single-use cup waste with a stylish, sustainable alternative.",
-    image: "/src/images/coffeecup.webp",
+    image: "https://images.unsplash.com/photo-1669824614885-abb2a862553a?w=700&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fHJldXNhYmxlJTIwY29mZmVlJTIwY3VwfGVufDB8fDB8fHww",
     price: "$18.99",
     badges: ["Heat Insulated", "Replaces 500+ Disposable Cups"]
   },
@@ -39,7 +39,7 @@ const products = [
     id: 5,
     name: "Menstrual Cup",
     description: "Medical-grade silicone menstrual cup that can be reused for years. Comfortable, leak-free protection that drastically reduces period waste.",
-    image: "/src/images/menstrualcup.png",
+    image: "https://images.unsplash.com/photo-1556037823-5b389f0e1bc1?q=80&w=2574&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     price: "$29.99",
     badges: ["Medical-Grade Silicone", "Saves 1000s of Disposables"]
   }
@@ -91,6 +91,13 @@ const Products = () => {
     setTimeout(() => {
       setAddedToCartId(null);
     }, 1500);
+  };
+
+  // Custom success button style for "Added to Cart"
+  const successStyle = {
+    background: 'linear-gradient(135deg, #22c55e, #16a34a)',
+    backgroundSize: '200% 100%',
+    backgroundPosition: '0% 0%'
   };
 
   return (
@@ -156,13 +163,14 @@ const Products = () => {
                         <span className="text-2xl font-display font-bold text-primary animate-pulse-soft">
                           {product.price}
                         </span>
-                        <div className="bg-primary/10 px-3 py-1 rounded-full text-sm text-primary animate-pulse-soft">
+                        <div className="bg-gradient-to-r from-primary/20 to-primary/10 px-3 py-1 rounded-full text-sm text-primary animate-pulse-soft">
                           Pre-order Now
                         </div>
                       </div>
                       <button 
-                        className={`btn-primary hover-lift ${addedToCartId === product.id ? 'bg-green-600' : ''}`}
+                        className="btn-primary hover-lift"
                         onClick={() => handleAddToCart(product)}
+                        style={addedToCartId === product.id ? successStyle : undefined}
                       >
                         {addedToCartId === product.id ? (
                           <>
@@ -185,7 +193,7 @@ const Products = () => {
             {/* Navigation Controls */}
             <button 
               onClick={prevSlide}
-              className="absolute top-1/2 left-4 transform -translate-y-1/2 bg-white/80 hover:bg-white text-primary p-2 rounded-full shadow-md hover-grow z-10"
+              className="btn-action absolute top-1/2 left-4 transform -translate-y-1/2 bg-white/90 text-primary p-2 rounded-full shadow-md z-10"
               aria-label="Previous product"
               disabled={isAnimating}
             >
@@ -194,7 +202,7 @@ const Products = () => {
             
             <button 
               onClick={nextSlide}
-              className="absolute top-1/2 right-4 transform -translate-y-1/2 bg-white/80 hover:bg-white text-primary p-2 rounded-full shadow-md hover-grow z-10"
+              className="btn-action absolute top-1/2 right-4 transform -translate-y-1/2 bg-white/90 text-primary p-2 rounded-full shadow-md z-10"
               aria-label="Next product"
               disabled={isAnimating}
             >
@@ -216,8 +224,8 @@ const Products = () => {
                   }}
                   className={`h-2.5 rounded-full transition-all duration-500 ${
                     index === activeIndex 
-                      ? 'bg-primary w-8 animate-pulse-soft' 
-                      : 'bg-primary/30 w-2.5'
+                      ? 'bg-gradient-to-r from-primary to-primary/70 w-8 animate-pulse-soft' 
+                      : 'bg-primary/30 w-2.5 hover:bg-primary/50'
                   }`}
                   aria-label={`Go to product ${index + 1}`}
                 />
@@ -239,7 +247,7 @@ const Products = () => {
             
             <div className="w-full md:w-2/3 bg-white rounded-full h-5 overflow-hidden shadow-inner">
               <div 
-                className="bg-primary h-full rounded-full animate-gradient"
+                className="h-full rounded-full animate-gradient"
                 style={{ 
                   width: '67%',
                   backgroundImage: 'linear-gradient(90deg, rgba(var(--primary), 0.7) 0%, rgba(var(--primary), 1) 50%, rgba(var(--primary), 0.7) 100%)'
