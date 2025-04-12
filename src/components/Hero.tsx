@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState, useRef } from 'react';
 import { ArrowRight } from 'lucide-react';
 
@@ -76,9 +75,9 @@ const Hero = () => {
               <div className="absolute -top-6 -left-6 w-32 h-32 bg-secondary rounded-full -z-10 animate-bounce-soft"></div>
               <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-accent rounded-full -z-10 animate-bounce-soft" style={{ animationDelay: '1s' }}></div>
               <img 
-                src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=800&q=80"
-                alt="Sustainable living products" 
-                className="rounded-2xl shadow-lg w-full h-auto object-cover aspect-[4/3] hover-grow"
+                src="/src/images/Sustainable.png"
+                alt="People caring for the planet" 
+                className="rounded-2xl shadow-lg w-full h-auto object-contain p-4 bg-white/40 backdrop-blur-sm hover-grow"
               />
             </div>
           </div>

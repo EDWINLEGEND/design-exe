@@ -1,10 +1,11 @@
-
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Leaf } from 'lucide-react';
+import { Menu, X, Leaf, ShoppingBag } from 'lucide-react';
+import { useCart } from '../lib/cart-context';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { cartCount, toggleCart } = useCart();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -36,20 +37,51 @@ const Navbar = () => {
         </a>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center gap-8">
+        <nav className="hidden md:flex items-center gap-6">
           <a href="#about" className="text-foreground/80 hover:text-primary transition-colors">About</a>
           <a href="#products" className="text-foreground/80 hover:text-primary transition-colors">Products</a>
           <a href="#features" className="text-foreground/80 hover:text-primary transition-colors">Features</a>
+          
+          {/* Cart Icon */}
+          <button 
+            className="relative p-2 text-foreground/80 hover:text-primary transition-colors"
+            onClick={toggleCart}
+            aria-label="Open cart"
+          >
+            <ShoppingBag className="w-5 h-5" />
+            {cartCount > 0 && (
+              <span className="absolute -top-1 -right-1 bg-primary text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
+                {cartCount}
+              </span>
+            )}
+          </button>
+          
           <a href="#contact" className="btn-primary">Join Now</a>
         </nav>
 
-        {/* Mobile Menu Button */}
-        <button 
-          className="md:hidden text-foreground"
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-        >
-          {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
+        {/* Mobile Menu Button and Cart */}
+        <div className="flex items-center gap-4 md:hidden">
+          {/* Cart Icon for Mobile */}
+          <button 
+            className="relative p-1 text-foreground/80 hover:text-primary transition-colors"
+            onClick={toggleCart}
+            aria-label="Open cart"
+          >
+            <ShoppingBag className="w-5 h-5" />
+            {cartCount > 0 && (
+              <span className="absolute -top-1 -right-1 bg-primary text-white text-xs w-4 h-4 rounded-full flex items-center justify-center">
+                {cartCount}
+              </span>
+            )}
+          </button>
+          
+          <button 
+            className="text-foreground"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+          >
+            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
       </div>
 
       {/* Mobile Navigation */}

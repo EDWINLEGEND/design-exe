@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef } from 'react';
 import Navbar from '../components/Navbar';
 import Hero from '../components/Hero';
@@ -10,6 +9,7 @@ import Testimonials from '../components/Testimonials';
 import Contact from '../components/Contact';
 import Footer from '../components/Footer';
 import ScrollToTop from '../components/ScrollToTop';
+import Cart from '../components/Cart';
 
 const Index = () => {
   const parallaxElements = useRef<HTMLDivElement[]>([]);
@@ -117,6 +117,7 @@ const Index = () => {
   return (
     <div className="overflow-x-hidden">
       <Navbar />
+      <Cart />
       
       {/* Floating leaves containers */}
       <div ref={addLeafContainerRef} className="fixed top-0 left-0 w-full h-screen pointer-events-none overflow-hidden"></div>
