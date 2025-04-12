@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { ChevronLeft, ChevronRight, ShoppingCart, Check, X } from 'lucide-react';
+import { ChevronLeft, ChevronRight, ShoppingCart, Check, X, Trophy, Award, Star, Sparkles } from 'lucide-react';
 import { useCart } from '../lib/cart-context';
+import { Element } from 'react-scroll';
+import { ScrollLink } from 'react-scroll';
 
 const products = [
   {
@@ -101,7 +103,7 @@ const Products = () => {
   };
 
   return (
-    <section id="products" className="section relative overflow-hidden animate-on-scroll">
+    <Element name="products" className="section relative overflow-hidden animate-on-scroll">
       {/* Background Elements */}
       <div className="absolute top-0 left-0 w-72 h-72 bg-secondary/20 rounded-full filter blur-3xl -z-10 animate-float"></div>
       <div className="absolute bottom-0 right-0 w-80 h-80 bg-primary/10 rounded-full filter blur-3xl -z-10 animate-float" style={{ animationDelay: '2s' }}></div>
@@ -233,30 +235,6 @@ const Products = () => {
             </div>
           </div>
         </div>
-        
-        <div className="mt-10 bg-muted rounded-2xl p-6 md:p-8 animate-on-scroll">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-            <div className="text-center md:text-left">
-              <h3 className="font-display text-xl md:text-2xl font-bold mb-2">
-                Impact Counter
-              </h3>
-              <p className="text-foreground/80">
-                Together, we've saved <span className="text-primary font-semibold animate-pulse-soft">10,250</span> plastic bottles so far.
-              </p>
-            </div>
-            
-            <div className="w-full md:w-2/3 bg-white rounded-full h-5 overflow-hidden shadow-inner">
-              <div 
-                className="h-full rounded-full animate-gradient"
-                style={{ 
-                  width: '67%',
-                  backgroundImage: 'linear-gradient(90deg, rgba(var(--primary), 0.7) 0%, rgba(var(--primary), 1) 50%, rgba(var(--primary), 0.7) 100%)'
-                }}
-              >
-              </div>
-            </div>
-          </div>
-        </div>
 
         {/* Sustainability Comparison Table */}
         <div className="mt-16 animate-on-scroll">
@@ -318,8 +296,96 @@ const Products = () => {
             </table>
           </div>
         </div>
+        
+        {/* Enhanced Impact Counter with Gamification */}
+        <div className="mt-16 animate-on-scroll">
+          <div className="bg-gradient-to-r from-primary/10 via-secondary/10 to-primary/10 rounded-2xl p-6 md:p-8 shadow-lg">
+            <div className="flex flex-col items-center justify-center mb-6">
+              <div className="flex items-center gap-2 mb-2">
+                <Trophy className="w-8 h-8 text-amber-500" />
+                <h3 className="font-display text-2xl md:text-3xl font-bold">
+                  Community Impact
+                </h3>
+                <Trophy className="w-8 h-8 text-amber-500" />
+              </div>
+              <p className="text-center text-foreground/80 max-w-2xl">
+                Join thousands of eco-warriors making a difference. Every purchase contributes to our global impact goals.
+              </p>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+              <div className="bg-white/70 backdrop-blur-sm rounded-xl p-5 text-center shadow-md hover:shadow-lg transition-all hover:scale-105 duration-300">
+                <div className="relative flex justify-center mb-4">
+                  <Award className="w-12 h-12 text-primary" />
+                  <Sparkles className="w-5 h-5 text-amber-400 absolute -top-1 -right-1 animate-pulse" />
+                </div>
+                <h4 className="font-display font-bold text-lg mb-1">Plastic Bottles Saved</h4>
+                <div className="text-4xl font-bold text-primary animate-counting mb-2">10,250</div>
+                <div className="text-xs text-foreground/70">That's 230kg of plastic waste!</div>
+              </div>
+              
+              <div className="bg-white/70 backdrop-blur-sm rounded-xl p-5 text-center shadow-md hover:shadow-lg transition-all hover:scale-105 duration-300">
+                <div className="relative flex justify-center mb-4">
+                  <Star className="w-12 h-12 text-yellow-500" />
+                  <Sparkles className="w-5 h-5 text-amber-400 absolute -top-1 -right-1 animate-pulse" />
+                </div>
+                <h4 className="font-display font-bold text-lg mb-1">Trees Planted</h4>
+                <div className="text-4xl font-bold text-green-600 animate-counting mb-2">1,845</div>
+                <div className="text-xs text-foreground/70">Absorbing 92 tons of CO₂ yearly</div>
+              </div>
+              
+              <div className="bg-white/70 backdrop-blur-sm rounded-xl p-5 text-center shadow-md hover:shadow-lg transition-all hover:scale-105 duration-300">
+                <div className="relative flex justify-center mb-4">
+                  <Award className="w-12 h-12 text-secondary" />
+                  <Sparkles className="w-5 h-5 text-amber-400 absolute -top-1 -right-1 animate-pulse" />
+                </div>
+                <h4 className="font-display font-bold text-lg mb-1">Active Members</h4>
+                <div className="text-4xl font-bold text-secondary animate-counting mb-2">3,750</div>
+                <div className="text-xs text-foreground/70">Growing stronger every day!</div>
+              </div>
+            </div>
+            
+            <div className="w-full bg-white rounded-full h-6 overflow-hidden shadow-inner p-1">
+              <div 
+                className="h-full rounded-full relative"
+                style={{ 
+                  width: '67%',
+                  background: 'linear-gradient(90deg, rgba(var(--primary), 0.7) 0%, rgba(var(--primary), 1) 50%, rgba(var(--primary), 0.7) 100%)',
+                  backgroundSize: '200% 100%',
+                  animation: 'gradient-shift 3s ease infinite, progress-grow 2s ease-out'
+                }}
+              >
+                <div className="absolute inset-0 overflow-hidden">
+                  <div className="w-full h-full animate-shimmer opacity-50" style={{ 
+                    backgroundImage: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent)',
+                    backgroundSize: '50% 100%',
+                    backgroundRepeat: 'no-repeat',
+                    backgroundPosition: '-100% 0'
+                  }}></div>
+                </div>
+                <div className="absolute top-1/2 right-2 transform -translate-y-1/2 text-white text-xs font-semibold">67%</div>
+              </div>
+            </div>
+            
+            <div className="text-center mt-4">
+              <p className="text-sm text-foreground/80">
+                Next goal: <strong>15,000</strong> plastic bottles saved
+              </p>
+              <ScrollLink 
+                to="contact" 
+                spy={true} 
+                smooth={true} 
+                duration={800} 
+                offset={-70}
+                className="inline-block btn-primary mt-4 cursor-pointer"
+              >
+                Join Our Mission
+              </ScrollLink>
+            </div>
+          </div>
+        </div>
       </div>
-    </section>
+    </Element>
   );
 };
 

@@ -1,10 +1,10 @@
-
 import React from 'react';
 import { Leaf, Droplet, Recycle } from 'lucide-react';
+import { Link as ScrollLink, Element } from 'react-scroll';
 
 const About = () => {
   return (
-    <section id="about" className="section bg-muted relative overflow-hidden">
+    <Element name="about" className="section bg-muted relative overflow-hidden">
       {/* Background Elements */}
       <div className="absolute top-1/2 right-0 w-64 h-64 bg-accent/20 rounded-full filter blur-3xl -z-10"></div>
       <div className="absolute bottom-0 left-1/3 w-48 h-48 bg-secondary/20 rounded-full filter blur-3xl -z-10"></div>
@@ -68,13 +68,19 @@ const About = () => {
                 — Emma Green, Founder of Verda
               </p>
             </div>
-            <a href="#contact" className="btn-primary inline-flex whitespace-nowrap">
+            <ScrollLink 
+              to="contact" 
+              smooth={true} 
+              duration={800} 
+              offset={-80}
+              className="btn-primary inline-flex whitespace-nowrap cursor-pointer"
+            >
               Join Our Mission
-            </a>
+            </ScrollLink>
           </div>
         </div>
       </div>
-    </section>
+    </Element>
   );
 };
 

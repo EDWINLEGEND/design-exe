@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Leaf, Instagram, Linkedin, Youtube, Heart, Twitter, Facebook, ArrowRight, CheckCircle, AlertCircle } from 'lucide-react';
+import { Link as ScrollLink, animateScroll as scroll } from 'react-scroll';
 
 const Footer = () => {
   const [email, setEmail] = useState('');
@@ -19,6 +20,13 @@ const Footer = () => {
       setSubscriptionStatus('idle');
       setEmail('');
     }, 3000);
+  };
+
+  const scrollToTop = () => {
+    scroll.scrollToTop({
+      duration: 800,
+      smooth: 'easeInOutQuart'
+    });
   };
 
   return (
@@ -69,12 +77,12 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
           {/* Brand Column */}
           <div className="lg:col-span-1">
-            <a href="#" className="flex items-center gap-2 mb-4">
+            <div onClick={scrollToTop} className="flex items-center gap-2 mb-4 cursor-pointer">
               <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center">
                 <Leaf className="text-white w-6 h-6" />
               </div>
               <span className="font-display font-bold text-2xl text-primary">Verda</span>
-            </a>
+            </div>
             <p className="text-foreground/70 mb-6">
               Creating sustainable products that help reduce waste, conserve resources, 
               and promote a healthier planet—because everyday products shouldn't cost the Earth.
@@ -185,9 +193,15 @@ const Footer = () => {
               </h4>
               <ul className="space-y-2.5">
                 <li>
-                  <a href="#about" className="text-foreground/70 hover:text-primary transition-colors">
+                  <ScrollLink 
+                    to="about"
+                    smooth={true}
+                    duration={800}
+                    offset={-80}
+                    className="text-foreground/70 hover:text-primary transition-colors cursor-pointer"
+                  >
                     About Us
-                  </a>
+                  </ScrollLink>
                 </li>
                 <li>
                   <a href="#" className="text-foreground/70 hover:text-primary transition-colors">
@@ -210,9 +224,15 @@ const Footer = () => {
                   </a>
                 </li>
                 <li>
-                  <a href="#contact" className="text-foreground/70 hover:text-primary transition-colors">
+                  <ScrollLink 
+                    to="contact"
+                    smooth={true}
+                    duration={800}
+                    offset={-80}
+                    className="text-foreground/70 hover:text-primary transition-colors cursor-pointer"
+                  >
                     Contact
-                  </a>
+                  </ScrollLink>
                 </li>
               </ul>
             </div>

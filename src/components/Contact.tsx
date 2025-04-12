@@ -1,6 +1,6 @@
-
 import React, { useState } from 'react';
 import { Send, CheckCircle } from 'lucide-react';
+import { Element } from 'react-scroll';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -36,7 +36,7 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" className="section bg-gradient-to-b from-white to-accent/20 relative overflow-hidden">
+    <Element name="contact" className="section bg-gradient-to-b from-white to-accent/20 relative overflow-hidden">
       {/* Background Elements */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-primary/10 rounded-full filter blur-3xl -z-10"></div>
       <div className="absolute bottom-0 left-0 w-80 h-80 bg-secondary/20 rounded-full filter blur-3xl -z-10"></div>
@@ -178,7 +178,7 @@ const Contact = () => {
           </div>
         </div>
       </div>
-    </section>
+    </Element>
   );
 };
 

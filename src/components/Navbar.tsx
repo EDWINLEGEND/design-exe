@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X, Leaf, ShoppingBag } from 'lucide-react';
 import { useCart } from '../lib/cart-context';
+import { Link as ScrollLink } from 'react-scroll';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -29,18 +30,55 @@ const Navbar = () => {
       }`}
     >
       <div className="container-custom flex items-center justify-between">
-        <a href="#" className="flex items-center gap-2">
+        <ScrollLink 
+          to="hero" 
+          smooth={true} 
+          duration={800} 
+          className="flex items-center gap-2 cursor-pointer"
+        >
           <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
             <Leaf className="text-white w-5 h-5" />
           </div>
           <span className="font-display font-bold text-xl text-primary">Verda</span>
-        </a>
+        </ScrollLink>
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center gap-6">
-          <a href="#about" className="text-foreground/80 hover:text-primary transition-colors">About</a>
-          <a href="#products" className="text-foreground/80 hover:text-primary transition-colors">Products</a>
-          <a href="#features" className="text-foreground/80 hover:text-primary transition-colors">Features</a>
+          <ScrollLink 
+            to="about" 
+            spy={true} 
+            smooth={true} 
+            duration={800} 
+            offset={-80}
+            className="text-foreground/80 hover:text-primary transition-colors cursor-pointer"
+            activeClass="text-primary"
+          >
+            About
+          </ScrollLink>
+          
+          <ScrollLink 
+            to="products" 
+            spy={true} 
+            smooth={true} 
+            duration={800} 
+            offset={-80}
+            className="text-foreground/80 hover:text-primary transition-colors cursor-pointer"
+            activeClass="text-primary"
+          >
+            Products
+          </ScrollLink>
+          
+          <ScrollLink 
+            to="features" 
+            spy={true} 
+            smooth={true} 
+            duration={800} 
+            offset={-80}
+            className="text-foreground/80 hover:text-primary transition-colors cursor-pointer"
+            activeClass="text-primary"
+          >
+            Features
+          </ScrollLink>
           
           {/* Cart Icon */}
           <button 
@@ -56,7 +94,15 @@ const Navbar = () => {
             )}
           </button>
           
-          <a href="#contact" className="btn-primary">Join Now</a>
+          <ScrollLink 
+            to="contact" 
+            smooth={true} 
+            duration={800} 
+            offset={-80}
+            className="btn-primary cursor-pointer"
+          >
+            Join Now
+          </ScrollLink>
         </nav>
 
         {/* Mobile Menu Button and Cart */}
@@ -88,34 +134,53 @@ const Navbar = () => {
       {isMenuOpen && (
         <div className="md:hidden bg-white absolute top-full left-0 right-0 shadow-lg animate-slide-up">
           <div className="container-custom py-4 flex flex-col space-y-4">
-            <a 
-              href="#about" 
-              className="text-foreground/80 hover:text-primary transition-colors py-2 border-b border-border"
+            <ScrollLink 
+              to="about" 
+              spy={true} 
+              smooth={true} 
+              duration={800} 
+              offset={-70}
+              className="text-foreground/80 hover:text-primary transition-colors py-2 border-b border-border cursor-pointer"
               onClick={() => setIsMenuOpen(false)}
             >
               About
-            </a>
-            <a 
-              href="#products" 
-              className="text-foreground/80 hover:text-primary transition-colors py-2 border-b border-border"
+            </ScrollLink>
+            
+            <ScrollLink 
+              to="products" 
+              spy={true} 
+              smooth={true} 
+              duration={800} 
+              offset={-70}
+              className="text-foreground/80 hover:text-primary transition-colors py-2 border-b border-border cursor-pointer"
               onClick={() => setIsMenuOpen(false)}
             >
               Products
-            </a>
-            <a 
-              href="#features" 
-              className="text-foreground/80 hover:text-primary transition-colors py-2 border-b border-border"
+            </ScrollLink>
+            
+            <ScrollLink 
+              to="features" 
+              spy={true} 
+              smooth={true} 
+              duration={800} 
+              offset={-70}
+              className="text-foreground/80 hover:text-primary transition-colors py-2 border-b border-border cursor-pointer"
               onClick={() => setIsMenuOpen(false)}
             >
               Features
-            </a>
-            <a 
-              href="#contact" 
-              className="btn-primary self-start"
+            </ScrollLink>
+            
+            <ScrollLink 
+              to="contact" 
+              spy={true} 
+              smooth={true} 
+              duration={800} 
+              offset={-70}
+              className="btn-primary self-start cursor-pointer"
               onClick={() => setIsMenuOpen(false)}
             >
               Join Now
-            </a>
+            </ScrollLink>
           </div>
         </div>
       )}

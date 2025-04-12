@@ -1,6 +1,6 @@
-
 import React from 'react';
 import { Globe, Shield, Truck, Leaf, Recycle, Droplet } from 'lucide-react';
+import { Link as ScrollLink, Element } from 'react-scroll';
 
 const Features = () => {
   const featureGroups = [
@@ -47,7 +47,7 @@ const Features = () => {
   ];
 
   return (
-    <section id="features" className="section bg-accent/20 relative overflow-hidden">
+    <Element name="features" className="section bg-accent/20 relative overflow-hidden">
       {/* Background Elements */}
       <div className="absolute top-1/3 left-1/4 w-72 h-72 bg-primary/10 rounded-full filter blur-3xl -z-10 animate-float"></div>
       
@@ -116,13 +116,20 @@ const Features = () => {
                 <span className="font-semibold block mt-2">— Sarah J., Verified Customer</span>
               </p>
             </div>
-            <a href="#contact" className="btn-primary self-start hover-glow animate-wiggle" style={{ animationDelay: '1s' }}>
+            <ScrollLink 
+              to="contact" 
+              smooth={true} 
+              duration={800} 
+              offset={-80}
+              className="btn-primary self-start hover-glow animate-wiggle cursor-pointer" 
+              style={{ animationDelay: '1s' }}
+            >
               Get Started Today
-            </a>
+            </ScrollLink>
           </div>
         </div>
       </div>
-    </section>
+    </Element>
   );
 };
 

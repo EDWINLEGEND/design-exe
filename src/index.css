@@ -439,3 +439,66 @@
     background-position: 0% 50%;
   }
 }
+
+/* Add smooth scrolling to the entire page */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Animation Keyframes for Impact Counter */
+@keyframes shimmer {
+  0% {
+    background-position: -100% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes progress-grow {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: 67%;
+  }
+}
+
+@keyframes counting {
+  0% {
+    transform: scale(0.95);
+    opacity: 0.7;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.animate-shimmer {
+  animation: shimmer 2s infinite;
+}
+
+.animate-gradient {
+  animation: gradient-shift 3s ease infinite;
+}
+
+.animate-counting {
+  animation: counting 2s ease-out;
+}

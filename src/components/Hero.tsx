@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { ArrowRight } from 'lucide-react';
+import { Link as ScrollLink, Element } from 'react-scroll';
 
 const Hero = () => {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -29,7 +30,7 @@ const Hero = () => {
   }, []);
   
   return (
-    <section className="pt-32 pb-16 md:pt-40 md:pb-24 relative overflow-hidden">
+    <Element name="hero" className="pt-32 pb-16 md:pt-40 md:pb-24 relative overflow-hidden">
       {/* Parallax Background Elements */}
       <div ref={parallaxBgRef} className="absolute top-0 left-0 w-full h-full -z-10">
         <div className="absolute top-0 right-0 w-96 h-96 bg-secondary/30 rounded-full filter blur-3xl opacity-70 animate-float"></div>
@@ -60,13 +61,26 @@ const Hero = () => {
               and empower conscious choices, one eco-friendly product at a time.
             </p>
             <div className={`flex flex-col sm:flex-row gap-4 transition-all duration-700 delay-300 ${isLoaded ? 'opacity-100' : 'opacity-0 -translate-y-4'}`}>
-              <a href="#products" className="btn-primary group hover-lift">
+              <ScrollLink 
+                to="products" 
+                smooth={true} 
+                duration={800} 
+                offset={-80}
+                className="btn-primary group hover-lift cursor-pointer"
+              >
                 Explore Products
                 <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
-              </a>
-              <a href="#about" className="btn-secondary hover-lift">
+              </ScrollLink>
+              
+              <ScrollLink 
+                to="about" 
+                smooth={true} 
+                duration={800} 
+                offset={-80}
+                className="btn-secondary hover-lift cursor-pointer"
+              >
                 Our Mission
-              </a>
+              </ScrollLink>
             </div>
           </div>
           
@@ -105,7 +119,7 @@ const Hero = () => {
           ))}
         </div>
       </div>
-    </section>
+    </Element>
   );
 };
 
