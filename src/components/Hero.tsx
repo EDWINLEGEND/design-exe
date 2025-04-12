@@ -75,7 +75,7 @@ const Hero = () => {
               <div className="absolute -top-6 -left-6 w-32 h-32 bg-secondary rounded-full -z-10 animate-bounce-soft"></div>
               <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-accent rounded-full -z-10 animate-bounce-soft" style={{ animationDelay: '1s' }}></div>
               <img 
-                src="/src/images/Sustainable.png"
+                src="https://d1oco4z2z1fhwp.cloudfront.net/templates/default/6811/Artboard_18.png"
                 alt="People caring for the planet" 
                 className="rounded-2xl shadow-lg w-full h-auto object-contain p-4 bg-white/40 backdrop-blur-sm hover-grow"
               />
