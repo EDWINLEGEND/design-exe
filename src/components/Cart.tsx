@@ -16,7 +16,7 @@ const Cart = () => {
   
   const cartRef = useRef<HTMLDivElement>(null);
   
-  // Calculate XP rewards - 10 XP per $1 spent
+  // Calculate XP rewards - 10 XP per ₹83 spent (previously $1)
   const totalXP = Math.round(totalPrice * 10);
   
   // Track for clicking outside the cart
@@ -119,7 +119,7 @@ const Cart = () => {
                     <div className="flex-1">
                       <div className="flex justify-between">
                         <h4 className="font-medium text-sm">{item.name}</h4>
-                        <span className="font-medium">${(item.price * item.quantity).toFixed(2)}</span>
+                        <span className="font-medium">₹{(item.price * item.quantity).toFixed(2)}</span>
                       </div>
                       
                       <div className="flex items-center gap-1 mt-1">
@@ -191,7 +191,7 @@ const Cart = () => {
                 </div>
                 <div>
                   <div className="text-sm font-medium">Carbon offset</div>
-                  <div className="text-xs text-muted-foreground">Add $1.99 to offset delivery emissions</div>
+                  <div className="text-xs text-muted-foreground">Add ₹165 to offset delivery emissions</div>
                 </div>
               </div>
               <div className="xp-badge py-0.5 px-2 text-xs">+30 XP</div>
@@ -201,19 +201,19 @@ const Cart = () => {
             <div className="space-y-2 mb-4">
               <div className="flex justify-between text-sm">
                 <span className="text-muted-foreground">Subtotal</span>
-                <span>${totalPrice.toFixed(2)}</span>
+                <span>₹{totalPrice.toFixed(2)}</span>
               </div>
               <div className="flex justify-between text-sm">
                 <span className="text-muted-foreground">Shipping</span>
-                <span>$4.99</span>
+                <span>₹414</span>
               </div>
               <div className="flex justify-between text-sm">
                 <span className="text-muted-foreground">Carbon offset</span>
-                <span>$1.99</span>
+                <span>₹165</span>
               </div>
               <div className="flex justify-between font-medium pt-2 border-t border-border">
                 <span>Total</span>
-                <span>${(totalPrice + 4.99 + 1.99).toFixed(2)}</span>
+                <span>₹{(totalPrice + 414 + 165).toFixed(2)}</span>
               </div>
             </div>
             

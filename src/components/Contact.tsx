@@ -2,6 +2,36 @@ import React, { useState } from 'react';
 import { Send, CheckCircle } from 'lucide-react';
 import { Element } from 'react-scroll';
 
+// Animation keyframes styles - simplified
+const animationStyles = `
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slide-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes bounce-soft {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+.animate-fade-in {
+  animation: fade-in 1s ease-out forwards;
+}
+
+.animate-slide-up {
+  animation: slide-up 1s ease-out forwards;
+}
+
+.animate-bounce-soft {
+  animation: bounce-soft 3s ease-in-out infinite;
+}
+`;
+
 const Contact = () => {
   const [formData, setFormData] = useState({
     name: '',
@@ -36,13 +66,11 @@ const Contact = () => {
   };
 
   return (
-    <Element name="contact" className="section bg-gradient-to-b from-white to-accent/20 relative overflow-hidden">
-      {/* Background Elements */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-primary/10 rounded-full filter blur-3xl -z-10"></div>
-      <div className="absolute bottom-0 left-0 w-80 h-80 bg-secondary/20 rounded-full filter blur-3xl -z-10"></div>
+    <Element name="contact" className="section bg-white relative overflow-hidden">
+      <style>{animationStyles}</style>
       
-      <div className="container-custom">
-        <div className="bg-white rounded-2xl shadow-xl overflow-hidden max-w-4xl mx-auto">
+      <div className="container-custom relative z-10">
+        <div className="bg-white rounded-2xl shadow-xl overflow-hidden max-w-4xl mx-auto border border-accent/5">
           <div className="flex flex-col md:flex-row">
             <div className="md:w-1/2 bg-primary p-8 md:p-10 text-white">
               <h2 className="font-display text-2xl md:text-3xl font-bold mb-4">

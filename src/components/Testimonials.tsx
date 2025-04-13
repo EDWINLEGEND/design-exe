@@ -1,6 +1,36 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { ChevronLeft, ChevronRight, Quote, Star } from 'lucide-react';
 
+// Animation keyframes styles - simplified
+const animationStyles = `
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slide-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes bounce-soft {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+.animate-fade-in {
+  animation: fade-in 1s ease-out forwards;
+}
+
+.animate-slide-up {
+  animation: slide-up 1s ease-out forwards;
+}
+
+.animate-bounce-soft {
+  animation: bounce-soft 3s ease-in-out infinite;
+}
+`;
+
 const Testimonials = () => {
   const testimonials = [
     {
@@ -97,11 +127,10 @@ const Testimonials = () => {
   const handleMouseLeave = () => setIsPaused(false);
 
   return (
-    <section className="py-16 relative overflow-hidden animate-on-scroll">
-      <div className="absolute -bottom-20 -left-20 w-64 h-64 bg-secondary/30 rounded-full filter blur-3xl -z-10 animate-float"></div>
-      <div className="absolute top-20 -right-20 w-52 h-52 bg-primary/20 rounded-full filter blur-3xl -z-10 animate-float-reverse"></div>
+    <section className="relative py-16 overflow-hidden bg-white">
+      <style>{animationStyles}</style>
       
-      <div className="container-custom">
+      <div className="container-custom relative z-10">
         <div className="text-center max-w-3xl mx-auto mb-10">
           <span className="eco-badge mb-3">💬 Customer Stories</span>
           <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">
@@ -114,7 +143,7 @@ const Testimonials = () => {
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
         >
-          <div className="bg-white rounded-2xl shadow-lg p-6 md:p-10 relative overflow-hidden">
+          <div className="bg-white rounded-2xl shadow-lg p-6 md:p-10 relative overflow-hidden border border-accent/5">
             <div className="absolute -top-6 -left-6 text-primary opacity-20">
               <Quote className="w-16 h-16" />
             </div>
@@ -212,7 +241,7 @@ const Testimonials = () => {
                 }}
                 className={`h-2.5 rounded-full transition-all duration-300 ${
                   index === currentIndex 
-                    ? 'bg-primary w-8' 
+                    ? 'bg-gradient-to-r from-primary to-primary/70 w-8' 
                     : 'bg-primary/30 w-2.5 hover:bg-primary/50'
                 }`}
                 aria-label={`View testimonial ${index + 1}`}

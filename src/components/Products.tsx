@@ -20,6 +20,37 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 
+// Animation keyframes styles - simplified
+const animationStyles = `
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slide-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes progress-grow {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+.animate-fade-in {
+  animation: fade-in 1s ease-out forwards;
+}
+
+.animate-slide-up {
+  animation: slide-up 1s ease-out forwards;
+}
+
+.animate-progress-grow {
+  animation: progress-grow 1.5s ease-out forwards;
+  transform-origin: left;
+}
+`;
+
 // Update products with standardized pricing and more detailed information
 const products = [
   {
@@ -27,9 +58,9 @@ const products = [
     name: "Bamboo Toothbrush",
     description: "Sustainable bamboo handle with BPA-free nylon bristles. 100% biodegradable handle helps eliminate plastic waste from your daily routine.",
     image: "https://images.unsplash.com/photo-1553691475-f38e4026275b?w=700&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8YmFtYm9vJTIwdG9vdGglMjBicnVzaHxlbnwwfDF8MHx8fDA%3D",
-    price: "From $4.99",
-    priceRange: "$4.99 - $16.99",
-    compareAtPrice: "$7.99",
+    price: "From ₹414",
+    priceRange: "₹414 - ₹1,410",
+    compareAtPrice: "₹663",
     badges: ["100% Biodegradable Handle", "Plastic-Free Packaging"],
     eco: true,
     fullDescription: "Our bamboo toothbrushes feature handles made from 100% biodegradable bamboo, a highly sustainable resource that grows quickly without the need for pesticides or fertilizers. The bristles are made from BPA-free nylon that's gentle on gums while still being effective at removing plaque. Each toothbrush comes in plastic-free, compostable packaging with soy-based inks. Available in adult and child sizes, with soft, medium, and firm bristle options.",
@@ -41,10 +72,10 @@ const products = [
       { label: "End of Life", value: "Remove bristles for recycling, compost handle" }
     ],
     variants: [
-      { name: "Single Adult Brush (Soft)", price: "$4.99" },
-      { name: "Family Pack (4 Adult Brushes)", price: "$16.99" },
-      { name: "Kids Brush", price: "$4.99" },
-      { name: "Mixed Family Pack (2 Adult, 2 Kids)", price: "$16.99" }
+      { name: "Single Adult Brush (Soft)", price: "₹414" },
+      { name: "Family Pack (4 Adult Brushes)", price: "₹1,410" },
+      { name: "Kids Brush", price: "₹414" },
+      { name: "Mixed Family Pack (2 Adult, 2 Kids)", price: "₹1,410" }
     ]
   },
   {
@@ -52,9 +83,9 @@ const products = [
     name: "Organic Cotton T-Shirt",
     description: "GOTS-certified organic cotton t-shirt made without harmful chemicals. Ethically manufactured under fair-trade conditions to ensure living wages.",
     image: "https://images.unsplash.com/photo-1739001411231-4fc0f4140259?w=700&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fG9yZ2FuaWMlMjB0JTIwc2hpcnR8ZW58MHwxfDB8fHww",
-    price: "From $24.99",
-    priceRange: "$24.99 - $29.99",
-    compareAtPrice: "$34.99",
+    price: "From ₹2,074",
+    priceRange: "₹2,074 - ₹2,489",
+    compareAtPrice: "₹2,904",
     badges: ["Ethically Made", "Zero Chemical Processing"],
     eco: true,
     fullDescription: "Our organic cotton t-shirts are made from 100% GOTS-certified organic cotton, grown without harmful pesticides or synthetic fertilizers. The fabric is exceptionally soft and breathable, making it perfect for everyday wear. Every shirt is ethically manufactured in facilities that ensure fair wages and safe working conditions for all workers. The fabric undergoes minimal processing with no chemical treatments, making it safer for your skin and the environment.",
@@ -66,9 +97,9 @@ const products = [
       { label: "Colors", value: "Natural, Black, Forest Green, Ocean Blue" }
     ],
     variants: [
-      { name: "Natural - All Sizes", price: "$24.99" },
-      { name: "Colored Options - All Sizes", price: "$26.99" },
-      { name: "Long Sleeve Version - All Colors", price: "$29.99" }
+      { name: "Natural - All Sizes", price: "₹2,074" },
+      { name: "Colored Options - All Sizes", price: "₹2,240" },
+      { name: "Long Sleeve Version - All Colors", price: "₹2,489" }
     ]
   },
   {
@@ -76,9 +107,9 @@ const products = [
     name: "Reusable Glass Water Bottle",
     description: "Durable borosilicate glass bottle with protective silicone sleeve. Leak-proof and free from BPA, lead, and other toxins found in plastic bottles.",
     image: "https://images.unsplash.com/photo-1602143407151-7111542de6e8?auto=format&fit=crop&q=80&w=800",
-    price: "From $24.99",
-    priceRange: "$24.99 - $34.99",
-    compareAtPrice: "$39.99",
+    price: "From ₹2,074",
+    priceRange: "₹2,074 - ₹2,904",
+    compareAtPrice: "₹3,319",
     badges: ["Infinitely Recyclable", "Plastic Waste Reduction"],
     eco: true,
     fullDescription: "Our reusable glass water bottles are made from durable borosilicate glass that can withstand temperature changes without cracking. Each bottle includes a protective silicone sleeve that improves grip and protects against breakage. The stainless steel cap creates a leak-proof seal and includes a convenient carry loop. These bottles are completely free from BPA, lead, phthalates, and other toxins commonly found in plastic alternatives. Available in multiple sizes and sleeve colors.",
@@ -90,9 +121,9 @@ const products = [
       { label: "Temperature Range", value: "-20°C to 100°C (-4°F to 212°F)" }
     ],
     variants: [
-      { name: "16oz Bottle - All Colors", price: "$24.99" },
-      { name: "25oz Bottle - All Colors", price: "$29.99" },
-      { name: "34oz Bottle - All Colors", price: "$34.99" }
+      { name: "16oz Bottle - All Colors", price: "₹2,074" },
+      { name: "25oz Bottle - All Colors", price: "₹2,489" },
+      { name: "34oz Bottle - All Colors", price: "₹2,904" }
     ]
   },
   {
@@ -100,9 +131,9 @@ const products = [
     name: "Reusable Coffee Cup",
     description: "Insulated bamboo fiber coffee cup that keeps your drinks hot. Eliminates single-use cup waste with a stylish, sustainable alternative.",
     image: "https://images.unsplash.com/photo-1669824614885-abb2a862553a?w=700&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fHJldXNhYmxlJTIwY29mZmVlJTIwY3VwfGVufDB8fDB8fHww",
-    price: "From $18.99",
-    priceRange: "$18.99 - $24.99",
-    compareAtPrice: "$27.99",
+    price: "From ₹1,576",
+    priceRange: "₹1,576 - ₹2,074",
+    compareAtPrice: "₹2,323",
     badges: ["Heat Insulated", "Replaces 500+ Disposable Cups"],
     eco: true,
     fullDescription: "Our reusable coffee cups are made from bamboo fiber and lined with a food-grade silicone interior that doesn't affect the taste of your beverage. The double-walled design keeps hot drinks hot and cold drinks cold for hours longer than single-use cups. Each cup comes with a secure, splash-resistant lid and a comfortable heat-resistant sleeve. These cups fit in standard car cup holders and most coffee shop machines, making them a convenient, sustainable choice for your daily coffee routine.",
@@ -114,9 +145,9 @@ const products = [
       { label: "Care", value: "Hand wash recommended, not microwave safe" }
     ],
     variants: [
-      { name: "12oz Cup - All Colors", price: "$18.99" },
-      { name: "16oz Cup - All Colors", price: "$22.99" },
-      { name: "Gift Set (12oz Cup + Accessories)", price: "$24.99" }
+      { name: "12oz Cup - All Colors", price: "₹1,576" },
+      { name: "16oz Cup - All Colors", price: "₹1,908" },
+      { name: "Gift Set (12oz Cup + Accessories)", price: "₹2,074" }
     ]
   },
   {
@@ -124,9 +155,9 @@ const products = [
     name: "Menstrual Cup",
     description: "Medical-grade silicone menstrual cup that can be reused for years. Comfortable, leak-free protection that drastically reduces period waste.",
     image: "https://images.unsplash.com/photo-1556037823-5b389f0e1bc1?q=80&w=2574&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    price: "From $29.99",
-    priceRange: "$29.99 - $49.99",
-    compareAtPrice: "$39.99",
+    price: "From ₹2,489",
+    priceRange: "₹2,489 - ₹4,149",
+    compareAtPrice: "₹3,319",
     badges: ["Medical-Grade Silicone", "Saves 1000s of Disposables"],
     eco: true,
     fullDescription: "Our menstrual cups are made from 100% medical-grade silicone that's hypoallergenic and free from BPA, latex, and dyes. Each cup can be reused for up to 10 years with proper care, replacing thousands of disposable period products. The soft, flexible design conforms to your body for comfortable, reliable protection for up to 12 hours. Each cup comes with a natural cotton storage pouch and detailed instructions for use and care. Available in multiple sizes to ensure the perfect fit.",
@@ -138,9 +169,9 @@ const products = [
       { label: "Includes", value: "Cup, organic cotton storage pouch, detailed instructions" }
     ],
     variants: [
-      { name: "Single Cup - Any Size", price: "$29.99" },
-      { name: "Starter Kit (Cup + Sterilizer)", price: "$39.99" },
-      { name: "Complete Set (2 Cups + Sterilizer + Extras)", price: "$49.99" }
+      { name: "Single Cup - Any Size", price: "₹2,489" },
+      { name: "Starter Kit (Cup + Sterilizer)", price: "₹3,319" },
+      { name: "Complete Set (2 Cups + Sterilizer + Extras)", price: "₹4,149" }
     ]
   }
 ];
@@ -225,25 +256,24 @@ const Products = () => {
   };
 
   return (
-    <Element name="products" className="section relative overflow-hidden animate-on-scroll">
-      {/* Background Elements */}
-      <div className="absolute top-0 left-0 w-72 h-72 bg-secondary/20 rounded-full filter blur-3xl -z-10 animate-float"></div>
-      <div className="absolute bottom-0 right-0 w-80 h-80 bg-primary/10 rounded-full filter blur-3xl -z-10 animate-float" style={{ animationDelay: '2s' }}></div>
+    <Element name="products" className="section relative overflow-hidden bg-white">
+      <style>{animationStyles}</style>
       
-      <div className="container-custom">
-        <div className="text-center max-w-3xl mx-auto mb-12 animate-on-scroll">
+      <div className="container-custom relative">
+        {/* Products Header */}
+        <div className="text-center max-w-3xl mx-auto mb-12 animate-fade-in">
           <Badge variant="outline" className="eco-badge mb-3 px-3 py-1">🚀 New Products</Badge>
-          <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">
+          <h2 className="font-display text-3xl md:text-4xl font-bold mb-4 animate-slide-up" style={{ animationDelay: '0.2s' }}>
             Sustainable Products for Everyday Life
           </h2>
-          <p className="text-foreground/80 text-lg">
+          <p className="text-foreground/80 text-lg animate-slide-up" style={{ animationDelay: '0.3s' }}>
             Discover our latest eco-friendly products designed to help you reduce waste 
             while enhancing your daily routine. Sustainable living has never been easier.
           </p>
         </div>
         
-        <div className="relative animate-on-scroll">
-          {/* Product Carousel */}
+        {/* Product Carousel - with animation delay */}
+        <div className="relative animate-fade-in" style={{ animationDelay: '0.4s' }}>
           <div className="relative overflow-hidden rounded-2xl bg-white shadow-xl">
             <div 
               className={`flex transition-all duration-500 ease-in-out ${
@@ -396,7 +426,7 @@ const Products = () => {
                   className={`h-2 rounded-full transition-all duration-300 ${
                     index === activeIndex 
                       ? 'bg-gradient-to-r from-primary to-primary/70 w-6' 
-                      : 'bg-primary/30 w-2 hover:bg-primary/50'
+                      : 'bg-primary/30 w-2.5 hover:bg-primary/50'
                   }`}
                   aria-label={`Go to product ${index + 1}`}
                 />
@@ -541,17 +571,17 @@ const Products = () => {
         </Dialog>
 
         {/* Sustainability Comparison Table */}
-        <div className="mt-16 animate-on-scroll">
+        <div className="mt-24 animate-fade-in" style={{ animationDelay: '0.5s' }}>
           <div className="text-center max-w-3xl mx-auto mb-8">
-            <h2 className="font-display text-2xl md:text-3xl font-bold mb-3">
+            <h2 className="font-display text-2xl md:text-3xl font-bold mb-3 animate-slide-up" style={{ animationDelay: '0.6s' }}>
               Why Choose Sustainable?
             </h2>
-            <p className="text-foreground/80">
+            <p className="text-foreground/80 animate-slide-up" style={{ animationDelay: '0.7s' }}>
               See how our sustainable products compare to conventional alternatives
             </p>
           </div>
 
-          <div className="overflow-x-auto rounded-xl shadow-lg">
+          <div className="overflow-x-auto rounded-2xl shadow-xl border border-primary/5 animate-fade-in" style={{ animationDelay: '0.8s' }}>
             <table className="w-full bg-white">
               <thead>
                 <tr className="border-b">
@@ -642,75 +672,83 @@ const Products = () => {
         </div>
         
         {/* Community Impact */}
-        <section className="py-16 bg-gradient-to-br from-green-50 to-blue-50">
-          <div className="container mx-auto px-4">
-            <h2 className="text-3xl md:text-4xl font-display font-bold text-center mb-12">Our Community Impact</h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <div className="bg-white rounded-xl p-6 shadow-lg transform hover:scale-105 transition-transform duration-300">
-                <div className="flex justify-between items-center mb-4">
-                  <div className="h-14 w-14 rounded-full bg-primary/10 flex items-center justify-center">
-                    <Droplets className="h-7 w-7 text-primary" />
+        <div className="mt-24 animate-fade-in" style={{ animationDelay: '0.9s' }}>
+          <div className="rounded-2xl overflow-hidden bg-white shadow-xl border border-primary/10">
+            <div className="p-8 md:p-12">
+              <h2 className="text-3xl md:text-4xl font-display font-bold text-center mb-12 animate-slide-up" style={{ animationDelay: '1s' }}>
+                Our Community Impact
+              </h2>
+              
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div className="bg-white rounded-xl p-6 shadow-lg transform hover:scale-105 transition-transform duration-300 border border-primary/5 animate-slide-up" style={{ animationDelay: '1.1s' }}>
+                  <div className="flex justify-between items-center mb-4">
+                    <div className="h-14 w-14 rounded-full bg-primary/10 flex items-center justify-center">
+                      <Droplets className="h-7 w-7 text-primary" />
+                    </div>
+                    <div className="text-3xl font-bold text-primary">12,482</div>
                   </div>
-                  <div className="text-3xl font-bold text-primary">12,482</div>
+                  <h3 className="text-xl font-medium mb-2">Plastic Bottles Saved</h3>
+                  <p className="text-gray-600 mb-4">Each reusable bottle replaces an average of 167 single-use bottles annually</p>
+                  <div className="w-full bg-gray-200/70 rounded-full h-2.5">
+                    <div className="bg-primary h-2.5 rounded-full animate-progress-grow" style={{ width: '83%' }}></div>
+                  </div>
+                  <div className="flex justify-between text-sm mt-2">
+                    <span className="text-gray-500">Goal: 15,000</span>
+                    <span className="font-medium text-primary">83% Complete</span>
+                  </div>
                 </div>
-                <h3 className="text-xl font-medium mb-2">Plastic Bottles Saved</h3>
-                <p className="text-gray-600 mb-4">Each reusable bottle replaces an average of 167 single-use bottles annually</p>
-                <div className="w-full bg-gray-200 rounded-full h-2.5">
-                  <div className="bg-primary h-2.5 rounded-full" style={{ width: '83%' }}></div>
+                
+                <div className="bg-white rounded-xl p-6 shadow-lg transform hover:scale-105 transition-transform duration-300 border border-primary/5 animate-slide-up" style={{ animationDelay: '1.2s' }}>
+                  <div className="flex justify-between items-center mb-4">
+                    <div className="h-14 w-14 rounded-full bg-secondary/10 flex items-center justify-center">
+                      <TreePine className="h-7 w-7 text-secondary" />
+                    </div>
+                    <div className="text-3xl font-bold text-secondary">3,547</div>
+                  </div>
+                  <h3 className="text-xl font-medium mb-2">Trees Planted</h3>
+                  <p className="text-gray-600 mb-4">One tree is planted for every 5 sustainable products purchased</p>
+                  <div className="w-full bg-gray-200/70 rounded-full h-2.5">
+                    <div className="bg-secondary h-2.5 rounded-full animate-progress-grow" style={{ width: '71%', animationDelay: '0.3s' }}></div>
+                  </div>
+                  <div className="flex justify-between text-sm mt-2">
+                    <span className="text-gray-500">Goal: 5,000</span>
+                    <span className="font-medium text-secondary">71% Complete</span>
+                  </div>
                 </div>
-                <div className="flex justify-between text-sm mt-2">
-                  <span className="text-gray-500">Goal: 15,000</span>
-                  <span className="font-medium text-primary">83% Complete</span>
+                
+                <div className="bg-white rounded-xl p-6 shadow-lg transform hover:scale-105 transition-transform duration-300 border border-primary/5 animate-slide-up" style={{ animationDelay: '1.3s' }}>
+                  <div className="flex justify-between items-center mb-4">
+                    <div className="h-14 w-14 rounded-full bg-accent/10 flex items-center justify-center">
+                      <Users className="h-7 w-7 text-accent" />
+                    </div>
+                    <div className="text-3xl font-bold text-accent">8,953</div>
+                  </div>
+                  <h3 className="text-xl font-medium mb-2">Active Members</h3>
+                  <p className="text-gray-600 mb-4">Our community grows by an average of 250 new members each month</p>
+                  <div className="w-full bg-gray-200/70 rounded-full h-2.5">
+                    <div className="bg-accent h-2.5 rounded-full animate-progress-grow" style={{ width: '89%', animationDelay: '0.6s' }}></div>
+                  </div>
+                  <div className="flex justify-between text-sm mt-2">
+                    <span className="text-gray-500">Goal: 10,000</span>
+                    <span className="font-medium text-accent">89% Complete</span>
+                  </div>
                 </div>
               </div>
               
-              <div className="bg-white rounded-xl p-6 shadow-lg transform hover:scale-105 transition-transform duration-300">
-                <div className="flex justify-between items-center mb-4">
-                  <div className="h-14 w-14 rounded-full bg-secondary/10 flex items-center justify-center">
-                    <TreePine className="h-7 w-7 text-secondary" />
-                  </div>
-                  <div className="text-3xl font-bold text-secondary">3,547</div>
-                </div>
-                <h3 className="text-xl font-medium mb-2">Trees Planted</h3>
-                <p className="text-gray-600 mb-4">One tree is planted for every 5 sustainable products purchased</p>
-                <div className="w-full bg-gray-200 rounded-full h-2.5">
-                  <div className="bg-secondary h-2.5 rounded-full" style={{ width: '71%' }}></div>
-                </div>
-                <div className="flex justify-between text-sm mt-2">
-                  <span className="text-gray-500">Goal: 5,000</span>
-                  <span className="font-medium text-secondary">71% Complete</span>
-                </div>
+              <div className="mt-16 text-center animate-fade-in" style={{ animationDelay: '1.4s' }}>
+                <Button size="lg" className="bg-primary hover:bg-primary/90 text-white font-medium px-8">
+                  Join Our Community
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Button>
+                <p className="mt-4 text-gray-600 max-w-lg mx-auto">Join thousands of eco-conscious individuals making a difference one sustainable choice at a time.</p>
               </div>
-              
-              <div className="bg-white rounded-xl p-6 shadow-lg transform hover:scale-105 transition-transform duration-300">
-                <div className="flex justify-between items-center mb-4">
-                  <div className="h-14 w-14 rounded-full bg-accent/10 flex items-center justify-center">
-                    <Users className="h-7 w-7 text-accent" />
-                  </div>
-                  <div className="text-3xl font-bold text-accent">8,953</div>
-                </div>
-                <h3 className="text-xl font-medium mb-2">Active Members</h3>
-                <p className="text-gray-600 mb-4">Our community grows by an average of 250 new members each month</p>
-                <div className="w-full bg-gray-200 rounded-full h-2.5">
-                  <div className="bg-accent h-2.5 rounded-full" style={{ width: '89%' }}></div>
-                </div>
-                <div className="flex justify-between text-sm mt-2">
-                  <span className="text-gray-500">Goal: 10,000</span>
-                  <span className="font-medium text-accent">89% Complete</span>
-                </div>
-              </div>
-            </div>
-            
-            <div className="mt-16 text-center">
-              <Button size="lg" className="bg-primary hover:bg-primary/90 text-white font-medium px-8">
-                Join Our Community
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
-              <p className="mt-4 text-gray-600 max-w-lg mx-auto">Join thousands of eco-conscious individuals making a difference one sustainable choice at a time.</p>
             </div>
           </div>
-        </section>
+        </div>
       </div>
+      
+      {/* Add global animation keyframes styles */}
+      <style dangerouslySetInnerHTML={{ __html: animationStyles }} />
     </Element>
   );
 };
