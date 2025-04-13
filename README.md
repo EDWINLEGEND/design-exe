@@ -8,7 +8,7 @@
 
 
 ## **Link to figma file**
-https://www.figma.com/file/xYzAB123CDefGHIjk789/Verda-Eco-Platform
+https://www.figma.com/design/z13Z6iA62YA9QgZ745jSZu/THINKER-HUB?node-id=21-110&t=lH3vtTNVEBMPaVgz-1
 
 ## **Hosted url**
 https://design-exe.vercel.app/
@@ -16,7 +16,7 @@ https://design-exe.vercel.app/
 ## **Installation**
 ```bash
 # Clone the repository
-git clone https://github.com/EDWINLEGEND123/design-exe.git
+git clone https://github.com/EDWINLEGEND/design-exe.git
 
 # Navigate to project directory
 cd design-exe
