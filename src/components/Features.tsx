@@ -50,6 +50,7 @@ const Features = () => {
     <Element name="features" className="section bg-accent/20 relative overflow-hidden">
       {/* Background Elements */}
       <div className="absolute top-1/3 left-1/4 w-72 h-72 bg-primary/10 rounded-full filter blur-3xl -z-10 animate-float"></div>
+      <div className="absolute bottom-0 right-0 w-64 h-64 bg-secondary/10 rounded-full filter blur-3xl -z-10 animate-float-reverse" style={{ animationDelay: '2s' }}></div>
       
       <div className="container-custom">
         <div className="text-center max-w-3xl mx-auto mb-16 animate-on-scroll">
@@ -73,18 +74,18 @@ const Features = () => {
               {group.features.map((feature, index) => (
                 <div 
                   key={index}
-                  className="card-eco text-center group hover-lift"
+                  className="bg-white rounded-xl border border-primary/10 shadow-md p-6 hover:-translate-y-2 hover:shadow-lg transition-all duration-300 group"
                   style={{ transitionDelay: `${index * 0.1}s` }}
                 >
-                  <div className="w-20 h-20 mx-auto mb-6 flex items-center justify-center rounded-full bg-white border border-primary/20 group-hover:bg-primary/10 transition-colors animate-on-scroll">
+                  <div className="w-20 h-20 mx-auto mb-6 flex items-center justify-center rounded-full bg-gradient-to-br from-primary/10 to-secondary/10 border border-primary/20 group-hover:border-primary/40 transition-colors">
                     <div className="text-primary animate-bounce-soft" style={{ animationDelay: `${index * 0.2}s` }}>
                       {feature.icon}
                     </div>
                   </div>
-                  <h4 className="font-display text-xl font-semibold mb-3 group-hover:text-primary transition-colors">
+                  <h4 className="font-display text-xl font-semibold mb-3 text-center group-hover:text-primary transition-colors">
                     {feature.title}
                   </h4>
-                  <p className="text-foreground/70">
+                  <p className="text-foreground/70 text-center">
                     {feature.description}
                   </p>
                 </div>
@@ -93,12 +94,12 @@ const Features = () => {
           </div>
         ))}
         
-        <div className="mt-16 flex flex-col md:flex-row gap-8 bg-white rounded-2xl overflow-hidden shadow-lg animate-on-scroll hover-lift">
+        <div className="mt-16 flex flex-col md:flex-row gap-8 bg-white rounded-2xl overflow-hidden shadow-lg border border-primary/10 animate-on-scroll hover:-translate-y-2 transition-transform duration-300">
           <div className="md:w-1/2 overflow-hidden">
             <img 
               src="https://images.unsplash.com/photo-1615729947596-a598e5de0ab3?auto=format&fit=crop&q=80&w=800"
               alt="Person using eco-friendly products" 
-              className="w-full h-full object-cover transition-transform duration-700 hover:scale-110"
+              className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
             />
           </div>
           <div className="md:w-1/2 p-8 md:p-10 flex flex-col justify-center">
@@ -109,7 +110,7 @@ const Features = () => {
               Every Verda product you use helps create a ripple effect of positive change. 
               Our customers have already helped save over 10,000 plastic bottles from ending up in landfills and oceans.
             </p>
-            <div className="bg-muted p-4 rounded-lg mb-6 hover-grow">
+            <div className="bg-muted p-5 rounded-xl mb-6 border border-primary/5 hover:border-primary/20 transition-colors">
               <p className="italic text-foreground/70">
                 "These products have helped me reduce my plastic waste by 80% in just three months. 
                 The quality is exceptional and they look beautiful too!" 
@@ -121,8 +122,7 @@ const Features = () => {
               smooth={true} 
               duration={800} 
               offset={-80}
-              className="btn-primary self-start hover-glow animate-wiggle cursor-pointer" 
-              style={{ animationDelay: '1s' }}
+              className="btn-primary self-start hover:scale-105 transition-transform" 
             >
               Get Started Today
             </ScrollLink>

@@ -42,7 +42,7 @@ const About = () => {
           ].map((item, index) => (
             <div 
               key={index} 
-              className="card-eco group hover:bg-primary/5 hover:-translate-y-1"
+              className="card-eco group hover:bg-primary/5 hover:-translate-y-1 bg-white/80 backdrop-blur-sm border border-primary/10 shadow-md rounded-xl p-6 transition-all duration-300"
             >
               <div className="p-3 mb-4 w-16 h-16 flex items-center justify-center bg-primary/10 rounded-full">
                 {item.icon}
@@ -57,8 +57,9 @@ const About = () => {
           ))}
         </div>
         
-        <div className="mt-16 bg-gradient-to-r from-primary/10 to-accent/10 p-8 md:p-12 rounded-2xl relative overflow-hidden">
+        <div className="mt-16 bg-gradient-to-r from-primary/20 via-secondary/10 to-accent/20 p-8 md:p-12 rounded-2xl relative overflow-hidden shadow-lg border border-primary/10 hover:shadow-xl transition-all duration-300">
           <div className="absolute top-0 right-0 w-32 h-32 bg-primary/20 rounded-full filter blur-2xl"></div>
+          <div className="absolute bottom-0 left-0 w-24 h-24 bg-secondary/20 rounded-full filter blur-2xl"></div>
           <div className="relative z-10 text-center md:text-left md:flex items-center justify-between gap-8">
             <div className="md:max-w-xl mb-6 md:mb-0">
               <h3 className="font-display text-2xl md:text-3xl font-bold mb-3">
@@ -73,7 +74,7 @@ const About = () => {
               smooth={true} 
               duration={800} 
               offset={-80}
-              className="btn-primary inline-flex whitespace-nowrap cursor-pointer"
+              className="btn-primary inline-flex whitespace-nowrap cursor-pointer hover:scale-105 transition-transform"
             >
               Join Our Mission
             </ScrollLink>

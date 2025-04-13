@@ -59,7 +59,7 @@ const Certifications = () => {
           </p>
         </div>
         
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-6">
           {certifications.map((cert, index) => (
             <div 
               key={index} 
@@ -67,17 +67,18 @@ const Certifications = () => {
               onMouseEnter={() => setActiveCert(index)}
               onMouseLeave={() => setActiveCert(null)}
             >
-              <div className={`flex flex-col items-center bg-white rounded-xl border ${activeCert === index ? 'border-primary shadow-lg' : 'border-border shadow-sm'} p-4 h-full hover-lift transition-all duration-300`}>
-                <div className={`text-primary mb-3 transform transition-transform duration-300 ${activeCert === index ? 'scale-110' : ''}`}>
+              <div className={`flex flex-col items-center bg-white rounded-xl ${activeCert === index ? 'border-2 border-primary shadow-lg' : 'border border-primary/10 shadow-sm'} p-5 h-full hover:-translate-y-1 transition-all duration-300`}>
+                <div className={`rounded-full bg-primary/10 p-3 text-primary mb-3 transform transition-transform duration-300 ${activeCert === index ? 'scale-110' : ''}`}>
                   {cert.icon}
                 </div>
-                <span className="font-semibold text-sm text-center">{cert.name}</span>
+                <span className="font-semibold text-center">{cert.name}</span>
                 
                 {/* Description popup on hover */}
-                <div className={`absolute inset-0 bg-white/95 backdrop-blur-sm rounded-xl p-3 flex items-center justify-center border border-primary shadow-lg transition-all duration-300 overflow-hidden ${activeCert === index ? 'opacity-100 scale-100' : 'opacity-0 scale-90 pointer-events-none'}`}>
-                  <p className="text-xs text-center text-foreground/80">
+                <div className={`absolute bottom-full left-0 right-0 mb-2 bg-white rounded-xl p-4 border-2 border-primary/20 shadow-lg transition-all duration-300 z-20 ${activeCert === index ? 'opacity-100 scale-100' : 'opacity-0 scale-90 pointer-events-none'}`}>
+                  <div className="text-sm text-foreground/80">
                     {cert.description}
-                  </p>
+                  </div>
+                  <div className="absolute bottom-0 left-1/2 w-4 h-4 bg-white border-r-2 border-b-2 border-primary/20 transform rotate-45 translate-y-2 -translate-x-2"></div>
                 </div>
               </div>
             </div>
@@ -85,9 +86,9 @@ const Certifications = () => {
         </div>
         
         <div className="mt-12 flex justify-center">
-          <a href="#" className="text-center text-primary hover:text-primary/70 flex flex-col items-center transition-colors">
-            <span className="font-medium">View Our Certification Documents</span>
-            <span className="text-sm text-foreground/60 mt-1">PDF download available</span>
+          <a href="#" className="bg-primary/10 hover:bg-primary/20 text-primary font-medium px-6 py-3 rounded-full transition-colors flex items-center gap-2">
+            <BadgeCheck className="w-5 h-5" />
+            <span>View Our Certification Documents</span>
           </a>
         </div>
       </div>

@@ -6,45 +6,84 @@
 
 @layer base {
   :root {
-    --background: 150 30% 98%;
-    --foreground: 150 10% 10%;
+    /* Updated eco-friendly color scheme */
+    --background: 60 30% 97%;
+    --foreground: 110 20% 15%;
 
-    --card: 150 20% 98%;
-    --card-foreground: 150 10% 10%;
+    --card: 0 0% 100%;
+    --card-foreground: 110 20% 15%;
 
-    --popover: 150 20% 98%;
-    --popover-foreground: 150 10% 10%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 110 20% 15%;
 
     --primary: 142 76% 36%;
-    --primary-foreground: 150 10% 98%;
+    --primary-foreground: 60 30% 97%;
 
-    --secondary: 38 92% 85%;
-    --secondary-foreground: 38 30% 15%;
+    --secondary: 84 80% 40%;
+    --secondary-foreground: 60 30% 97%;
 
-    --muted: 150 10% 92%;
-    --muted-foreground: 150 10% 40%;
+    --accent: 43 96% 56%;
+    --accent-foreground: 110 20% 15%;
 
-    --accent: 196 80% 89%;
-    --accent-foreground: 196 30% 15%;
+    --muted: 140 20% 96%;
+    --muted-foreground: 110 15% 40%;
 
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
+    --destructive-foreground: 60 30% 97%;
 
-    --border: 150 20% 90%;
-    --input: 150 20% 90%;
+    --border: 140 30% 92%;
+    --input: 140 30% 92%;
     --ring: 142 76% 36%;
 
     --radius: 0.75rem;
     
-    /* Gradient colors */
-    --gradient-primary-start: 142 76% 40%;
-    --gradient-primary-end: 160 76% 30%;
-    --gradient-secondary-start: 38 92% 85%;
-    --gradient-secondary-end: 45 92% 80%;
+    /* Gradient colors - eco palette */
+    --gradient-primary-start: 142 76% 38%;
+    --gradient-primary-end: 160 70% 28%;
+    --gradient-secondary-start: 84 80% 42%;
+    --gradient-secondary-end: 96 60% 36%;
+    --gradient-accent-start: 43 96% 56%;
+    --gradient-accent-end: 36 90% 48%;
     --gradient-destructive-start: 0 84% 60%;
     --gradient-destructive-end: 0 70% 45%;
-    --gradient-accent-start: 196 80% 89%;
-    --gradient-accent-end: 190 70% 70%;
+    
+    /* Game colors - eco-friendly */
+    --xp: 43 96% 53%;
+    --level: 84 80% 40%;
+    --achievement: 32 95% 44%;
+    --rare: 160 70% 55%;
+    --epic: 198 90% 40%;
+    --legendary: 32 95% 44%;
+  }
+
+  .dark {
+    --background: 110 20% 7%;
+    --foreground: 60 30% 97%;
+
+    --card: 110 20% 10%;
+    --card-foreground: 60 30% 97%;
+
+    --popover: 110 20% 10%;
+    --popover-foreground: 60 30% 97%;
+
+    --primary: 142 70% 36%;
+    --primary-foreground: 60 30% 97%;
+
+    --secondary: 84 70% 35%;
+    --secondary-foreground: 60 30% 97%;
+
+    --accent: 43 90% 48%;
+    --accent-foreground: 60 30% 97%;
+
+    --muted: 110 25% 15%;
+    --muted-foreground: 140 10% 70%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 60 30% 97%;
+
+    --border: 110 15% 20%;
+    --input: 110 15% 20%;
+    --ring: 142 70% 36%;
   }
 
   * {
@@ -58,14 +97,40 @@
 }
 
 @layer components {
+  /* Updated badges with more gamified feel */
   .eco-badge {
-    @apply inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-gradient-to-r from-primary/20 to-primary/10 text-primary;
+    @apply inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-gradient-to-r from-primary/20 to-primary/10 text-primary shadow-sm hover:shadow-md hover:scale-105 transition-all;
+  }
+  
+  .xp-badge {
+    @apply inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-gradient-to-r from-yellow-400 to-yellow-300 text-yellow-900 shadow-sm hover:shadow-md transition-all;
+  }
+  
+  .level-badge {
+    @apply inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-gradient-to-r from-secondary to-secondary/80 text-white shadow-sm hover:shadow-md transition-all;
+  }
+  
+  .achievement-badge {
+    @apply inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-gradient-to-r from-amber-500 to-amber-400 text-white shadow-sm hover:shadow-md transition-all;
+  }
+  
+  .rare-badge {
+    @apply inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-gradient-to-r from-cyan-400 to-cyan-300 text-cyan-900 shadow-sm hover:shadow-md transition-all;
+  }
+  
+  .epic-badge {
+    @apply inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-gradient-to-r from-purple-600 to-purple-500 text-white shadow-sm hover:shadow-md transition-all animate-pulse;
+  }
+  
+  .legendary-badge {
+    @apply inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-gradient-to-r from-amber-500 to-amber-400 text-white shadow-sm shadow-amber-400/20 hover:shadow-amber-400/40 transition-all animate-pulse;
   }
   
   .container-custom {
     @apply px-4 md:px-8 lg:px-12 mx-auto max-w-6xl;
   }
   
+  /* Updated button styles with enhanced hover effects */
   .btn-primary {
     @apply text-white py-3 px-6 rounded-full font-medium transition-all hover:shadow-lg hover:shadow-primary/20 flex items-center justify-center gap-2 relative overflow-hidden z-10;
     background: linear-gradient(135deg, hsl(var(--gradient-primary-start)), hsl(var(--gradient-primary-end)));
@@ -80,7 +145,7 @@
   }
   
   .btn-secondary {
-    @apply text-secondary-foreground py-3 px-6 rounded-full font-medium transition-all hover:shadow-lg hover:shadow-secondary/20 flex items-center justify-center gap-2 relative overflow-hidden z-10;
+    @apply text-white py-3 px-6 rounded-full font-medium transition-all hover:shadow-lg hover:shadow-secondary/20 flex items-center justify-center gap-2 relative overflow-hidden z-10;
     background: linear-gradient(135deg, hsl(var(--gradient-secondary-start)), hsl(var(--gradient-secondary-end)));
     background-size: 200% 100%;
     background-position: 0% 0%;
@@ -88,6 +153,19 @@
   }
   
   .btn-secondary:hover {
+    background-position: 100% 0%;
+    transform: translateY(-3px);
+  }
+  
+  .btn-accent {
+    @apply text-white py-3 px-6 rounded-full font-medium transition-all hover:shadow-lg hover:shadow-accent/20 flex items-center justify-center gap-2 relative overflow-hidden z-10;
+    background: linear-gradient(135deg, hsl(var(--gradient-accent-start)), hsl(var(--gradient-accent-end)));
+    background-size: 200% 100%;
+    background-position: 0% 0%;
+    transition: all 0.5s ease;
+  }
+  
+  .btn-accent:hover {
     background-position: 100% 0%;
     transform: translateY(-3px);
   }
@@ -140,56 +218,57 @@
     opacity: 1;
   }
   
-  /* Destructive button with gradient */
-  .btn-destructive {
-    @apply text-white py-2 px-4 rounded-full font-medium transition-all flex items-center justify-center gap-2 relative overflow-hidden z-10;
-    background: linear-gradient(135deg, hsl(var(--gradient-destructive-start)), hsl(var(--gradient-destructive-end)));
-    background-size: 200% 100%;
-    background-position: 0% 0%;
-    transition: all 0.5s ease;
+  /* Game element cards */
+  .game-card {
+    @apply bg-white p-6 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 border border-border relative overflow-hidden;
   }
   
-  .btn-destructive:hover {
-    background-position: 100% 0%;
-    transform: translateY(-2px);
+  .game-card-rare {
+    @apply game-card border-cyan-400/30 shadow-cyan-400/10 hover:shadow-cyan-400/20;
   }
   
-  /* Checkout button with different gradient */
-  .btn-checkout {
-    @apply text-white py-3 px-6 rounded-full font-medium transition-all hover:shadow-lg flex items-center justify-center gap-2 relative overflow-hidden z-10;
-    background: linear-gradient(135deg, hsl(var(--gradient-primary-start)), hsl(var(--gradient-primary-end)/0.8));
-    background-size: 200% 100%;
-    background-position: 0% 0%;
-    transition: all 0.5s ease;
+  .game-card-epic {
+    @apply game-card border-purple-500/30 shadow-purple-500/10 hover:shadow-purple-500/20;
   }
   
-  .btn-checkout:hover {
-    background-position: 100% 0%;
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  .game-card-legendary {
+    @apply game-card border-amber-400/30 shadow-amber-400/10 hover:shadow-amber-400/20;
   }
   
+  /* Updated sectioning */
   .section {
     @apply py-16 md:py-24;
   }
   
-  .card-eco {
-    @apply bg-white p-6 rounded-2xl shadow-md hover:shadow-lg transition-all duration-300 border border-border;
+  /* Game progress bars */
+  .progress-bar {
+    @apply w-full bg-white/70 rounded-full h-4 shadow-inner overflow-hidden;
   }
   
-  .input-eco {
-    @apply w-full px-4 py-3 rounded-lg border border-border bg-white focus:ring-2 focus:ring-primary/50 focus:border-primary outline-none;
+  .progress-bar-fill {
+    @apply h-full rounded-full relative;
+    background: linear-gradient(90deg, rgba(var(--primary), 0.7) 0%, rgba(var(--primary), 1) 50%, rgba(var(--primary), 0.7) 100%);
+    background-size: 200% 100%;
+    animation: gradient-shift 3s ease infinite, progress-grow 2s ease-out;
   }
   
-  .parallax-bg {
-    @apply w-full h-full absolute top-0 left-0 -z-10 will-change-transform;
+  .progress-bar-xp {
+    @apply h-full rounded-full relative;
+    background: linear-gradient(90deg, hsl(var(--accent), 0.7) 0%, hsl(var(--accent), 1) 50%, hsl(var(--accent), 0.7) 100%);
+    background-size: 200% 100%;
+    animation: gradient-shift 3s ease infinite;
   }
   
-  .floating-leaf {
-    @apply absolute rounded-full bg-primary/10 animate-float pointer-events-none;
+  .progress-bar-level {
+    @apply h-full rounded-full relative;
+    background: linear-gradient(90deg, hsl(var(--secondary), 0.7) 0%, hsl(var(--secondary), 1) 50%, hsl(var(--secondary), 0.7) 100%);
+    background-size: 200% 100%;
+    animation: gradient-shift 3s ease infinite;
   }
 }
 
 @layer utilities {
+  /* Animation utilities */
   .animate-float {
     animation: float 6s ease-in-out infinite;
   }
@@ -246,6 +325,28 @@
     animation: gradientBg 3s ease infinite;
   }
   
+  .animate-shimmer {
+    animation: shimmer 2s infinite;
+  }
+  
+  .animate-counting {
+    animation: counting 2s ease-out;
+  }
+  
+  /* Game-specific animations */
+  .animate-levelup {
+    animation: levelUp 1s ease-out;
+  }
+  
+  .animate-reward {
+    animation: reward 1.5s ease-out;
+  }
+  
+  .animate-achievement {
+    animation: achievement 2s ease-out;
+  }
+  
+  /* Interaction utilities */
   .hover-grow {
     transition: transform 0.3s ease;
   }
@@ -271,6 +372,19 @@
     box-shadow: 0 0 15px hsl(var(--primary));
   }
   
+  .hover-glow-xp:hover {
+    box-shadow: 0 0 15px hsl(var(--xp));
+  }
+  
+  .hover-glow-epic:hover {
+    box-shadow: 0 0 15px hsl(var(--epic));
+  }
+  
+  .hover-glow-legendary:hover {
+    box-shadow: 0 0 15px hsl(var(--legendary));
+  }
+  
+  /* Card and shape styles */
   .parallax-container {
     @apply relative overflow-hidden;
   }
@@ -304,6 +418,7 @@
   }
 }
 
+/* Animation keyframes */
 @keyframes float {
   0% {
     transform: translateY(0px) rotate(0deg);
@@ -440,12 +555,16 @@
   }
 }
 
-/* Add smooth scrolling to the entire page */
-html {
-  scroll-behavior: smooth;
+@keyframes bounceSoft {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
 }
 
-/* Animation Keyframes for Impact Counter */
+/* Shimmer animation for progress bars and cards */
 @keyframes shimmer {
   0% {
     background-position: -100% 0;
@@ -455,6 +574,7 @@ html {
   }
 }
 
+/* Gradient animation for buttons and cards */
 @keyframes gradient-shift {
   0% {
     background-position: 0% 50%;
@@ -467,6 +587,7 @@ html {
   }
 }
 
+/* Progress bar animation */
 @keyframes progress-grow {
   0% {
     width: 0%;
@@ -476,6 +597,7 @@ html {
   }
 }
 
+/* Counter animation */
 @keyframes counting {
   0% {
     transform: scale(0.95);
@@ -491,14 +613,60 @@ html {
   }
 }
 
-.animate-shimmer {
-  animation: shimmer 2s infinite;
+/* Game-specific animations */
+@keyframes levelUp {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.3);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
-.animate-gradient {
-  animation: gradient-shift 3s ease infinite;
+@keyframes reward {
+  0% {
+    transform: scale(0.8) rotate(-10deg);
+    opacity: 0;
+  }
+  25% {
+    transform: scale(1.2) rotate(5deg);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(0.9) rotate(-5deg);
+    opacity: 1;
+  }
+  75% {
+    transform: scale(1.1) rotate(2deg);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
 }
 
-.animate-counting {
-  animation: counting 2s ease-out;
+@keyframes achievement {
+  0% {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  40% {
+    transform: translateY(-10px);
+    opacity: 1;
+  }
+  70% {
+    transform: translateY(5px);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
