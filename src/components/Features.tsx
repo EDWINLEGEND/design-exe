@@ -45,10 +45,12 @@ const animationStyles = `
 
 .animate-on-hover-float:hover {
   animation: float 2s ease-in-out infinite;
+  opacity: 1 !important;
 }
 
 .animate-on-hover-float-reverse:hover {
   animation: float-reverse 2s ease-in-out infinite;
+  opacity: 1 !important;
 }
 
 .shadow-3d {
@@ -68,6 +70,11 @@ const animationStyles = `
 
 .icon-float:hover {
   transform: translateY(-5px) scale(1.1);
+}
+
+/* Fix for animated elements to ensure they remain visible */
+.animation-complete {
+  opacity: 1 !important;
 }
 `;
 
@@ -115,6 +122,17 @@ const Features = () => {
     }
   ];
 
+  // Use useEffect to add 'animation-complete' class after animations finish
+  React.useEffect(() => {
+    const animationTimeout = setTimeout(() => {
+      document.querySelectorAll('.animate-slide-up').forEach(el => {
+        el.classList.add('animation-complete');
+      });
+    }, 2000); // Allow enough time for all animations to complete
+
+    return () => clearTimeout(animationTimeout);
+  }, []);
+
   return (
     <Element name="features" className="section relative overflow-hidden bg-white">
       <style>{animationStyles}</style>
@@ -140,7 +158,7 @@ const Features = () => {
               {featureGroups[0].features.map((feature, index) => (
                 <div 
                   key={index}
-                  className="bg-white rounded-xl p-6 shadow-3d border border-accent/5 hover:shadow-md transition-all opacity-0 animate-slide-up animate-on-hover-float"
+                  className="feature-box bg-white rounded-xl p-6 shadow-3d border border-accent/5 opacity-0 animate-slide-up animate-on-hover-float"
                   style={{ animationDelay: `${0.8 + index * 0.1}s` }}
                 >
                   <div className="bg-primary/10 w-16 h-16 rounded-full flex items-center justify-center mb-4 text-primary mx-auto icon-float">
@@ -162,7 +180,7 @@ const Features = () => {
               {featureGroups[1].features.map((feature, index) => (
                 <div 
                   key={index}
-                  className="bg-white rounded-xl p-6 shadow-3d border border-accent/5 hover:shadow-md transition-all opacity-0 animate-slide-up animate-on-hover-float-reverse"
+                  className="feature-box bg-white rounded-xl p-6 shadow-3d border border-accent/5 opacity-0 animate-slide-up animate-on-hover-float-reverse"
                   style={{ animationDelay: `${1.4 + index * 0.1}s` }}
                 >
                   <div className="bg-secondary/10 w-16 h-16 rounded-full flex items-center justify-center mb-4 text-secondary mx-auto icon-float">
