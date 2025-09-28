@@ -1,9 +1,30 @@
 
+/**
+ * === FILE: tailwind.config.ts ===
+ *
+ * Short File Summary:
+ * - TailwindCSS configuration extending the default theme for an eco-friendly palette and UI primitives.
+ * - Enables class-based dark mode and scans project folders for class usage.
+ * - Adds custom keyframes/animations and hooks in `tailwindcss-animate`.
+ *
+ * Main exports:
+ * - default Config: Tailwind configuration object (satisfies Config).
+ *
+ * External deps & important imports:
+ * - tailwindcss: type Config for type-safe configuration.
+ * - tailwindcss-animate: plugin for animation utilities.
+ *
+ * Assumptions:
+ * - CSS variables (e.g., --primary) are defined in src/index.css to be consumed via HSL.
+ * - Content globs match Vite + React project structure.
+ */
+
 import type { Config } from "tailwindcss";
 
 export default {
-  darkMode: ["class"],
+  darkMode: ["class"], // Dark mode toggled by adding `.dark` to <html> or <body>
   content: [
+    // Directories to scan for class names
     "./pages/**/*.{ts,tsx}",
     "./components/**/*.{ts,tsx}",
     "./app/**/*.{ts,tsx}",
@@ -13,12 +34,13 @@ export default {
   theme: {
     container: {
       center: true,
-      padding: "2rem",
+      padding: "2rem", // Magic number: aligns with design spacing scale
       screens: {
-        "2xl": "1400px"
+        "2xl": "1400px" // Max container width on very large screens
       }
     },
     extend: {
+      // Color tokens map to CSS variables declared in index.css
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -64,6 +86,7 @@ export default {
         sm: "calc(var(--radius) - 4px)"
       },
       keyframes: {
+        // For accordion transitions compatible with Radix UI primitives
         "accordion-down": {
           from: { height: "0" },
           to: { height: "var(--radix-accordion-content-height)" },

@@ -1,7 +1,24 @@
+/**
+ * === FILE: src/lib/cart-context.tsx ===
+ * Short File Summary: React Context for a simple shopping cart demo. Provides provider + hook with state (items, open state) and actions (add/remove/update/clear, open/close/toggle) and computed totals for count and price.
+ * Main exports:
+ * - CartProvider: Context provider managing cart state and exposing actions + derived totals.
+ * - useCart: Hook to consume cart context with runtime safety.
+ * External deps: React (createContext/useContext/useState/useEffect), internal: none.
+ * Assumptions: Client-side React. Currency formatting/locale are handled by consumers. Demo data initializes cart for UX preview; replace with real data in production.
+ */
+
 import React, { createContext, useContext, useState, ReactNode } from 'react';
 
 // Define the types
-type CartItem = {
+/**
+ * Represents one line item in the cart.
+ * - id: Stable product identifier (number for demo; would be string/UUID in prod).
+ * - price: Unit price in currency units (no cents scaling in this demo).
+ * - quantity: Positive integer; 0 removes item.
+ * - badge: Optional marketing label for UI chip.
+ */
+ type CartItem = {
   id: number;
   name: string;
   price: number;
@@ -10,7 +27,8 @@ type CartItem = {
   badge?: string;
 };
 
-type CartContextType = {
+/** Public shape of the cart context, consumed via useCart(). */
+ type CartContextType = {
   cartItems: CartItem[];
   addToCart: (item: Omit<CartItem, 'quantity'>) => void;
   removeFromCart: (id: number) => void;
@@ -53,7 +71,15 @@ const demoProducts: Omit<CartItem, 'quantity'>[] = [
   }
 ];
 
-// Create provider component
+/**
+ * CartProvider
+ * - Purpose: Owns cart state and exposes CRUD actions + UI open state.
+ * - Props:
+ *   - children: ReactNode subtree that will access the cart context.
+ * - Returns: <CartContext.Provider> with state/actions/derived totals.
+ * - Side effects: Demo-only useEffect seeds initial cart items for UX.
+ * - Lifecycle: Rerenders when cartItems or isOpen setState triggers.
+ */
 export const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [isOpen, setIsOpen] = useState(false);
@@ -68,6 +94,10 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     }
   }, []);
 
+  /**
+   * Add an item to the cart. If item exists, increment quantity; else insert.
+   * @param item - Product info without quantity (quantity defaults to 1 on insert)
+   */
   const addToCart = (item: Omit<CartItem, 'quantity'>) => {
     setCartItems(prevItems => {
       // Check if item already exists in cart
@@ -87,10 +117,19 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     });
   };
 
+  /**
+   * Remove an item from the cart entirely by id.
+   * @param id - Product identifier.
+   */
   const removeFromCart = (id: number) => {
     setCartItems(prevItems => prevItems.filter(item => item.id !== id));
   };
 
+  /**
+   * Update the quantity of an existing item; removes when quantity <= 0.
+   * @param id - Product identifier.
+   * @param quantity - Desired quantity; if <= 0, item is removed.
+   */
   const updateQuantity = (id: number, quantity: number) => {
     if (quantity <= 0) {
       removeFromCart(id);
@@ -104,23 +143,28 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     );
   };
 
+  /** Clear the cart completely. */
   const clearCart = () => {
     setCartItems([]);
   };
 
+  /** Open the cart UI (e.g., drawer/sheet). */
   const openCart = () => {
     setIsOpen(true);
   };
 
+  /** Close the cart UI. */
   const closeCart = () => {
     setIsOpen(false);
   };
 
+  /** Toggle the cart UI open state. */
   const toggleCart = () => {
     setIsOpen(prev => !prev);
   };
 
   // Calculate total items and price
+  // O(n) over cart length; cheap at typical UI scales
   const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
   const totalPrice = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
   
@@ -149,11 +193,16 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   );
 };
 
-// Create custom hook for using cart context
+/**
+ * useCart
+ * - Purpose: Consume the cart context safely.
+ * - Returns: CartContextType value with items/actions/derived totals.
+ * - Errors: Throws if used outside of <CartProvider> to aid debugging.
+ */
 export const useCart = () => {
   const context = useContext(CartContext);
   if (context === undefined) {
     throw new Error('useCart must be used within a CartProvider');
   }
   return context;
-}; 
+};

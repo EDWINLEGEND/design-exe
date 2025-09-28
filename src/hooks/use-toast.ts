@@ -1,3 +1,25 @@
+/**
+ * === FILE: src/hooks/use-toast.ts ===
+ *
+ * Short File Summary (3–6 lines):
+ * - Local toast state manager with reducer, in-memory store, and subscription pattern.
+ * - Exposes `useToast()` hook to read toasts and dispatch dismiss actions.
+ * - Exposes `toast({...})` function to create/update/dismiss individual toasts.
+ * - Applies a TOAST_LIMIT and delayed removal for exit animations.
+ *
+ * Main exports:
+ * - reducer: pure reducer for toast state transitions (useful for tests).
+ * - useToast(): React hook returning { toasts, toast, dismiss }.
+ * - toast(): imperative API to add/update/dismiss toasts.
+ *
+ * External deps & important imports:
+ * - React: state/effect/hooks; relies on browser environment (setTimeout, matchMedia).
+ * - Toast types from components/ui/toast for type alignment.
+ *
+ * Assumptions:
+ * - Client-side only. Uses timers and global memory; not SSR-safe by default.
+ * - UI layer (Toaster) consumes `toasts` array and respects `open` prop transitions.
+ */
 import * as React from "react"
 
 import type {
@@ -6,8 +28,11 @@ import type {
 } from "@/components/ui/toast"
 
 const TOAST_LIMIT = 1
-const TOAST_REMOVE_DELAY = 1000000
+const TOAST_REMOVE_DELAY = 1000000 // Delay long enough for animation completion
 
+/**
+ * Type that represents a toast instance tracked by this store.
+ */
 type ToasterToast = ToastProps & {
   id: string
   title?: React.ReactNode
@@ -15,6 +40,7 @@ type ToasterToast = ToastProps & {
   action?: ToastActionElement
 }
 
+/** Action type constants for reducer; frozen via `as const`. */
 const actionTypes = {
   ADD_TOAST: "ADD_TOAST",
   UPDATE_TOAST: "UPDATE_TOAST",
@@ -24,6 +50,7 @@ const actionTypes = {
 
 let count = 0
 
+/** Generate stable, incremental string ids. */
 function genId() {
   count = (count + 1) % Number.MAX_SAFE_INTEGER
   return count.toString()
@@ -31,6 +58,9 @@ function genId() {
 
 type ActionType = typeof actionTypes
 
+/**
+ * Discriminated union for all reducer actions.
+ */
 type Action =
   | {
       type: ActionType["ADD_TOAST"]
@@ -53,8 +83,14 @@ interface State {
   toasts: ToasterToast[]
 }
 
+/**
+ * Map of toast id -> timeout id to coordinate delayed removal after dismiss.
+ */
 const toastTimeouts = new Map<string, ReturnType<typeof setTimeout>>()
 
+/**
+ * Enqueue removal so the UI can animate out before being purged from state.
+ */
 const addToRemoveQueue = (toastId: string) => {
   if (toastTimeouts.has(toastId)) {
     return
@@ -71,6 +107,13 @@ const addToRemoveQueue = (toastId: string) => {
   toastTimeouts.set(toastId, timeout)
 }
 
+/**
+ * Pure reducer that manages toast state transitions.
+ * - ADD_TOAST: Prepend and enforce TOAST_LIMIT.
+ * - UPDATE_TOAST: Shallow merge into matching toast.
+ * - DISMISS_TOAST: Set open=false and schedule removal.
+ * - REMOVE_TOAST: Remove by id, or clear all if id undefined.
+ */
 export const reducer = (state: State, action: Action): State => {
   switch (action.type) {
     case "ADD_TOAST":
@@ -90,8 +133,7 @@ export const reducer = (state: State, action: Action): State => {
     case "DISMISS_TOAST": {
       const { toastId } = action
 
-      // ! Side effects ! - This could be extracted into a dismissToast() action,
-      // but I'll keep it here for simplicity
+      // Side effect: schedule removal so exit animations can play
       if (toastId) {
         addToRemoveQueue(toastId)
       } else {
@@ -126,8 +168,8 @@ export const reducer = (state: State, action: Action): State => {
   }
 }
 
+// Simple pub/sub store feeding the hook below
 const listeners: Array<(state: State) => void> = []
-
 let memoryState: State = { toasts: [] }
 
 function dispatch(action: Action) {
@@ -137,8 +179,16 @@ function dispatch(action: Action) {
   })
 }
 
+/** Public toast payload without id (assigned internally). */
 type Toast = Omit<ToasterToast, "id">
 
+/**
+ * Imperative API to add a toast and get control handles.
+ *
+ * Returns: { id, update(next), dismiss() }
+ * Side effects: schedules timers and triggers subscribers.
+ * Errors: none thrown; relies on consumer handling UI.
+ */
 function toast({ ...props }: Toast) {
   const id = genId()
 
@@ -161,13 +211,17 @@ function toast({ ...props }: Toast) {
     },
   })
 
-  return {
-    id: id,
-    dismiss,
-    update,
-  }
+  return { id: id, dismiss, update }
 }
 
+/**
+ * useToast
+ *
+ * Purpose: Subscribe to the global in-memory toast state in React components.
+ * Lifecycle: client-only; sets up subscription on mount and cleans up on unmount.
+ * Returns: { toasts, toast, dismiss }
+ * Rerender causes: any state change in memoryState triggers listener update.
+ */
 function useToast() {
   const [state, setState] = React.useState<State>(memoryState)
 
